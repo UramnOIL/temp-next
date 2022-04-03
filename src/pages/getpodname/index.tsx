@@ -7,14 +7,22 @@ function useFetchName (): [string, boolean] {
   const [done, setDone] = useState(false)
   useEffect(() => {
     const get = async () => {
-      const response = await fetch(
-        'http://a5e09537e789d416f996ed07876373d1-910665498.ap-northeast-1.elb.amazonaws.com',
-        {
-          cache: 'no-cache'
+      try {
+        const response = await fetch(
+          'http://a5e09537e789d416f996ed07876373d1-910665498.ap-northeast-1.elb.amazonaws.com',
+          {
+            cache: 'no-cache'
+          }
+        )
+        if (response.ok) {
+          setName(await response.text())
         }
-      )
-      setName(await response.text())
-      setDone(true)
+      } catch (e) {
+        setName('error occured')
+        console.error(e)
+      } finally {
+        setDone(true)
+      }
     }
     get()
   }, [])
