@@ -24,6 +24,6 @@ Home.getInitialProps = async ({ req }) => {
       cache: 'no-cache'
     }
   )
-  const text = await res.text()
+  const text = await response.text()
   return { name: text }
 }
