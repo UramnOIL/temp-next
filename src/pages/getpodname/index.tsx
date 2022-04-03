@@ -1,8 +1,7 @@
 import Header from '@/components/organisms/Header'
 import * as React from 'react'
-import { useEffect, useState } from 'react'
 
-export default function Home({ name: string }) {
+export default function Home ({ name: string }) {
   return (
     <>
       <Header />
