@@ -2,42 +2,12 @@ import Header from '@/components/organisms/Header'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-function useFetchName (): [string, boolean] {
-  const [name, setName] = useState('not yet loaded')
-  const [done, setDone] = useState(false)
-  useEffect(() => {
-    const get = async () => {
-      try {
-        const response = await fetch(
-          'http://a5e09537e789d416f996ed07876373d1-910665498.ap-northeast-1.elb.amazonaws.com',
-          {
-            cache: 'no-cache'
-          }
-        )
-        if (response.ok) {
-          setName(await response.text())
-        }
-      } catch (e) {
-        setName('error occured')
-        console.error(e)
-      } finally {
-        setDone(true)
-      }
-    }
-    get()
-  }, [])
-  return [name, done]
-}
-
-export default function Home () {
-  const [name, done] = useFetchName()
+export default function Home({ name: string }) {
   return (
     <>
       <Header />
       <p>
-        {done
-          ? `あなたがアクセスしたPodの名前は 「${name}」 です。`
-          : 'フェッチ中'}
+        あなたがアクセスしたPodの名前は 「${name}」 です。
       </p>
       <span>Mixed Contentで通信がブロックされます。改修中です。</span>
       <a href="http://a5e09537e789d416f996ed07876373d1-910665498.ap-northeast-1.elb.amazonaws.com">
@@ -45,4 +15,15 @@ export default function Home () {
       </a>
     </>
   )
+}
+
+Home.getInitialProps = async ({ req }) => {
+  const response = await fetch(
+    'http://a5e09537e789d416f996ed07876373d1-910665498.ap-northeast-1.elb.amazonaws.com',
+    {
+      cache: 'no-cache'
+    }
+  )
+  const text = await res.text()
+  return { name: text }
 }
