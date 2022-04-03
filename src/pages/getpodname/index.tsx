@@ -39,6 +39,7 @@ export default function Home () {
           ? `あなたがアクセスしたPodの名前は 「${name}」 です。`
           : 'フェッチ中'}
       </p>
+      <span>Mixed Contentで通信がブロックされます。改修中です。</span>
       <a href="http://a5e09537e789d416f996ed07876373d1-910665498.ap-northeast-1.elb.amazonaws.com">
         http://a5e09537e789d416f996ed07876373d1-910665498.ap-northeast-1.elb.amazonaws.com
       </a>
