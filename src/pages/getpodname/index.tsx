@@ -23,7 +23,7 @@ const Home: NextPage<Props> = ({ podName }) => {
 
 export default Home
 
-Home.getInitialProps: Props = async ({ req }) => {
+Home.getInitialProps = async ({ req }) => {
   const response = await fetch(
     'http://a5e09537e789d416f996ed07876373d1-910665498.ap-northeast-1.elb.amazonaws.com',
     {
