@@ -6,7 +6,7 @@ type Props = {
   podName: string
 }
 
-export default function Home: NextPage<Props> ({ podName }) {
+const Home: NextPage<Props> = ({ podName }) => {
   return (
     <>
       <Header />
@@ -20,6 +20,8 @@ export default function Home: NextPage<Props> ({ podName }) {
     </>
   )
 }
+
+export default Home
 
 Home.getInitialProps = async ({ req }): Props => {
   const response = await fetch(
