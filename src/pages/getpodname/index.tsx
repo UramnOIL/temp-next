@@ -1,12 +1,17 @@
 import Header from '@/components/organisms/Header'
 import * as React from 'react'
+import { NextPage } from 'next'
 
-export default function Home ({ name: string }) {
+type Props = {
+  podName: string
+}
+
+export default function Home: NextPage<Props> ({ podName }) {
   return (
     <>
       <Header />
       <p>
-        あなたがアクセスしたPodの名前は 「${name}」 です。
+        あなたがアクセスしたPodの名前は 「${podName}」 です。
       </p>
       <span>Mixed Contentで通信がブロックされます。改修中です。</span>
       <a href="http://a5e09537e789d416f996ed07876373d1-910665498.ap-northeast-1.elb.amazonaws.com">
@@ -16,13 +21,13 @@ export default function Home ({ name: string }) {
   )
 }
 
-Home.getInitialProps = async ({ req }) => {
+Home.getInitialProps = async ({ req }): Props => {
   const response = await fetch(
     'http://a5e09537e789d416f996ed07876373d1-910665498.ap-northeast-1.elb.amazonaws.com',
     {
       cache: 'no-cache'
     }
   )
-  const text = await response.text()
-  return { name: text }
+  const podName = await response.text()
+  return { podName }
 }
